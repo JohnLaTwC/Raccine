@@ -37,11 +37,15 @@ jobs:
       run: msbuild -m /p:Configuration=Release
       working-directory: ./RaccineGUI/RaccineCfg
 
+    - name: Run CI explorer
+      run: ./explore.bat
+      shell: cmd
+      
     - name: Run build_dist.bat
       run: ./build_dist.bat
       shell: cmd
 
-    - name: Run build_dist.bat
+    - name: Run installer
       run: ./Raccine/install-raccine.bat FULL_SIMU
       shell: cmd
 
