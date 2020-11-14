@@ -150,8 +150,8 @@ Foreach ($Cmd in $GoodCmds) {
 # ########################################################
 # Run Defender Scan
 # 
-Set-MpPreference -MAPSReporting Advanced
-Set-MpPreference -SubmitSamplesConsent SendAllSamples
-Update-MpSignature
-Set-MpPreference -DisableBlockAtFirstSeen True
-Start-MpScan -ScanPath $RaccineInstallerFolder 
+wevtutil cl "Microsoft-Windows-Windows Defender/Operational"
+& "$env:ProgramFiles\Windows Defender\MpCmdRun.exe" -ValidateMapsConnection	
+& "$env:ProgramFiles\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File $RaccineInstallerFolder
+wevtutil qe "Microsoft-Windows-Windows Defender/Operational" /f:text
+
