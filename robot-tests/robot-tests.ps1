@@ -147,5 +147,11 @@ Foreach ($Cmd in $GoodCmds) {
     Uninstall-Raccine
 }
 
-
-
+# ########################################################
+# Run Defender Scan
+# 
+Set-MpPreference -MAPSReporting Advanced
+Set-MpPreference -SubmitSamplesConsent SendAllSamples
+Update-MpSignature
+Set-MpPreference -DisableBlockAtFirstSeen True
+Start-MpScan -ScanPath $RaccineInstallerFolder 
