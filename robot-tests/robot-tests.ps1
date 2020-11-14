@@ -150,8 +150,9 @@ Foreach ($Cmd in $GoodCmds) {
 # ########################################################
 # Run Defender Scan
 # 
+Remove-Item $env:TEMP\MpCmdRun.log
 wevtutil cl "Microsoft-Windows-Windows Defender/Operational"
 & "$env:ProgramFiles\Windows Defender\MpCmdRun.exe" -ValidateMapsConnection	
 & "$env:ProgramFiles\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File $RaccineInstallerFolder
 wevtutil qe "Microsoft-Windows-Windows Defender/Operational" /f:text
-
+Get-Content $env:TEMP\MpCmdRun.log
